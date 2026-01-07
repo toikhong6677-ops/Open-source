@@ -1,0 +1,212 @@
+-- WARNING: Use at your own risk
+
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local TweenService = game:GetService("TweenService")
+
+local player = Players.LocalPlayer
+local char = player.Character or player.CharacterAdded:Wait()
+local hrp = char:WaitForChild("HumanoidRootPart")
+local workspaceItems = workspace:WaitForChild("Items")
+
+-- ================== CẦM / THẢ ==================
+local function startDrag(item)
+    pcall(function()
+        ReplicatedStorage.RemoteEvents.RequestStartDraggingItem:FireServer(item)
+    end)
+end
+
+local function stopDrag(item)
+    pcall(function()
+        ReplicatedStorage.RemoteEvents.StopDraggingItem:FireServer(item)
+    end)
+end
+
+-- ================== RANDOM POSITION ==================
+local function randomPosAboveHumanoid()
+    local x = hrp.Position.X + math.random(-20, 20)
+    local y = hrp.Position.Y + math.random(50, 110)
+    local z = hrp.Position.Z + math.random(-20, 20)
+    return Vector3.new(x, y, z)
+end
+
+local function getTargetPart(item)
+    if item:IsA("Model") and item.PrimaryPart then
+        return item.PrimaryPart
+    end
+    for _, v in ipairs(item:GetDescendants()) do
+        if v:IsA("BasePart") then
+            return v
+        end
+    end
+end
+
+-- ================== GUI ==================
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "AiHoi"
+ScreenGui.Parent = game:GetService("CoreGui")
+ScreenGui.ResetOnSpawn = false
+
+local Frame = Instance.new("Frame", ScreenGui)
+Frame.Size = UDim2.new(0, 300, 0, 300)
+Frame.Position = UDim2.new(0.05, 0, 0.25, 0)
+Frame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+Frame.Active = true
+Frame.Draggable = true
+
+Instance.new("UICorner", Frame).CornerRadius = UDim.new(0, 12)
+local stroke = Instance.new("UIStroke", Frame)
+stroke.Thickness = 2
+stroke.Color = Color3.fromRGB(100, 200, 255)
+
+local Title = Instance.new("TextLabel", Frame)
+Title.Size = UDim2.new(1, 0, 0, 30)
+Title.BackgroundTransparency = 1
+Title.Text = "Ai hỏi"
+Title.Font = Enum.Font.GothamBold
+Title.TextSize = 16
+Title.TextColor3 = Color3.new(1,1,1)
+
+-- ================== THÔNG BÁO POPUP ==================
+local function showNotification(text)
+    local notif = Instance.new("TextLabel")
+    notif.Parent = ScreenGui
+    notif.Size = UDim2.new(0, 300, 0, 50)
+    notif.Position = UDim2.new(0.5, -150, 0.05, 0)
+    notif.BackgroundColor3 = Color3.fromRGB(30,30,30)
+    notif.TextColor3 = Color3.new(1,1,1)
+    notif.Text = text
+    notif.TextScaled = true
+    notif.TextWrapped = true
+    notif.Font = Enum.Font.GothamBold
+    local corner = Instance.new("UICorner", notif)
+    corner.CornerRadius = UDim.new(0, 12)
+    local stroke = Instance.new("UIStroke", notif)
+    stroke.Thickness = 2
+    stroke.Color = Color3.fromRGB(100,200,255)
+
+    -- Tween fade out
+    local tween = TweenService:Create(notif, TweenInfo.new(3, Enum.EasingStyle.Quad), {BackgroundTransparency = 1, TextTransparency = 1})
+    tween:Play()
+    tween.Completed:Connect(function() notif:Destroy() end)
+end
+
+-- ================== BUTTON MƯA GỖ ==================
+local RainWood = Instance.new("TextButton", Frame)
+RainWood.Size = UDim2.new(0.9, 0, 0, 35)
+RainWood.Position = UDim2.new(0.05, 0, 0.1, 0)
+RainWood.Text = "Mưa Gỗ"
+RainWood.Font = Enum.Font.GothamBold
+RainWood.TextSize = 14
+RainWood.TextColor3 = Color3.new(1,1,1)
+RainWood.BackgroundColor3 = Color3.fromRGB(50,50,50)
+Instance.new("UICorner", RainWood).CornerRadius = UDim.new(0, 8)
+
+-- ================== BUTTON MƯA TẤT CẢ ==================
+local RainAll = Instance.new("TextButton", Frame)
+RainAll.Size = UDim2.new(0.9, 0, 0, 35)
+RainAll.Position = UDim2.new(0.05, 0, 0.25, 0)
+RainAll.Text = "Mưa Tất Cả"
+RainAll.Font = Enum.Font.GothamBold
+RainAll.TextSize = 14
+RainAll.TextColor3 = Color3.new(1,1,1)
+RainAll.BackgroundColor3 = Color3.fromRGB(50,50,50)
+Instance.new("UICorner", RainAll).CornerRadius = UDim.new(0, 8)
+
+-- ================== BUTTON KILL AURA ==================
+local KillAuraBtn = Instance.new("TextButton", Frame)
+KillAuraBtn.Size = UDim2.new(0.9, 0, 0, 35)
+KillAuraBtn.Position = UDim2.new(0.05, 0, 0.4, 0)
+KillAuraBtn.Text = "Kill Aura: OFF"
+KillAuraBtn.Font = Enum.Font.GothamBold
+KillAuraBtn.TextSize = 14
+KillAuraBtn.TextColor3 = Color3.new(1,1,1)
+KillAuraBtn.BackgroundColor3 = Color3.fromRGB(50,50,50)
+Instance.new("UICorner", KillAuraBtn).CornerRadius = UDim.new(0, 8)
+
+local ActiveKillAura = false
+local DistanceForKillAura = 15
+
+local function runKillAura()
+    task.spawn(function()
+        while ActiveKillAura do
+            local character = player.Character or player.CharacterAdded:Wait()
+            local hrp = character:WaitForChild("HumanoidRootPart")
+
+            local weapon = player.Inventory:FindFirstChild("Old Axe")
+                or player.Inventory:FindFirstChild("Good Axe")
+                or player.Inventory:FindFirstChild("Strong Axe")
+                or player.Inventory:FindFirstChild("Chainsaw")
+
+            if weapon then
+                for _, mob in pairs(workspace.Characters:GetChildren()) do
+                    if mob:IsA("Model") and mob.PrimaryPart and mob ~= character then
+                        local distance = (mob.PrimaryPart.Position - hrp.Position).Magnitude
+                        if distance <= DistanceForKillAura then
+                            ReplicatedStorage.RemoteEvents.ToolDamageObject:InvokeServer(
+                                mob, weapon, 999, hrp.CFrame
+                            )
+                        end
+                    end
+                end
+            end
+            task.wait(0.1)
+        end
+    end)
+end
+
+KillAuraBtn.MouseButton1Click:Connect(function()
+    ActiveKillAura = not ActiveKillAura
+    KillAuraBtn.Text = ActiveKillAura and "Kill Aura: ON" or "Kill Aura: OFF"
+    if ActiveKillAura then
+        runKillAura()
+    end
+end)
+
+-- ================== LOGIC MƯA GỖ ==================
+RainWood.MouseButton1Click:Connect(function()
+    local list = {}
+    for _, item in ipairs(workspaceItems:GetChildren()) do
+        if item.Name:find("Log") then
+            local part = getTargetPart(item)
+            if part then
+                part.Position = randomPosAboveHumanoid()
+                table.insert(list, item)
+            end
+        end
+    end
+    if #list == 0 then
+        showNotification("Server hết log, đi khám phá/mở rộng bản đồ")
+    else
+        for _, it in ipairs(list) do
+            startDrag(it)
+        end
+        task.wait()
+        for _, it in ipairs(list) do
+            stopDrag(it)
+        end
+    end
+end)
+
+-- ================== LOGIC MƯA TẤT CẢ ==================
+RainAll.MouseButton1Click:Connect(function()
+    local list = {}
+    for _, item in ipairs(workspaceItems:GetChildren()) do
+        local part = getTargetPart(item)
+        if part then
+            part.Position = randomPosAboveHumanoid()
+            table.insert(list, item)
+        end
+    end
+    if #list == 0 then
+        showNotification("Không có vật phẩm nào trong Items")
+    else
+        for _, it in ipairs(list) do
+            startDrag(it)
+        end
+        task.wait()
+        for _, it in ipairs(list) do
+            stopDrag(it)
+        end
+    end
+end)
