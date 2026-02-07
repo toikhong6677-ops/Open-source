@@ -341,3 +341,5 @@ function NovaLib:CreateWindow(titleText)
     end
     return Tabs
 end
+
+return NovaLib
