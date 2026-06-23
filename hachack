@@ -49,44 +49,44 @@ end)
 
 --Tabs
 local Tab = Window:Tab({
-    Title = "Main",
+    Title = "chính",
     Icon = "bird",
     Locked = false,
 })
 
 local Tab2 = Window:Tab({
-    Title = "Brings",
+    Title = "lấy đồ",
     Icon = "box",
     Locked = false,
 })
 
 
 local Tab3 = Window:Tab({
-    Title = "Player",
+    Title = "anh tùng béo",
     Icon = "box",
     Locked = false,
 })
 
 local Tab4 = Window:Tab({
-    Title = "Combat",
+    Title = "đán nhau",
     Icon = "box",
     Locked = false,
 })
 
 local Tab5 = Window:Tab({
-    Title = "ESP",
+    Title = "nhìn đồ",
     Icon = "box",
     Locked = false,
 })
 
 local Tab6 = Window:Tab({
-    Title = "Misc",
+    Title = "khác",
     Icon = "box",
     Locked = false,
 })
 
 local Tab7 = Window:Tab({
-    Title = "Mobs",
+    Title = "vật",
     Icon = "box",
     Locked = false,
 })
@@ -98,27 +98,9 @@ Window:Tag({
 })
 --All Change
 local Section = Tab:Section({ 
-    Title = "Days",
+    Title = "ngày",
     TextXAlignment = "Left",
     TextSize = 17, -- Default Size
-})
-
-local Toggle = Tab3:Toggle({
-    Title = "God mode",
-    Desc = "infinite health",
-    Icon = "bird",
-    Type = "Toggle",
-    Default = false,
-    Callback = function(state) 
-            if state then
-        --[[
-	WARNING: Heads up! This script has not been verified by ScriptBlox. Use at your own risk!
-]]
-loadstring(game:HttpGet("https://raw.githubusercontent.com/ProBaconHub/DATABASE/refs/heads/main/99%20Nights%20in%20the%20Forest/Infinite%20Health.lua"))()
-        else
-            print("Of")
-            end
-    end
 })
 
 --// Dùng toggle trong Tab
@@ -138,8 +120,8 @@ local angle = 0
 
 -- Toggle trong GUI
 local Toggle = Tab:Toggle({
-    Title = "Auto Days",
-    Desc = "Circle Tween map",
+    Title = "sống qua ngày",
+    Desc = "bay vòng map",
     Icon = "star",
     Type = "Toggle",
     Default = false,
@@ -160,7 +142,7 @@ RunService.RenderStepped:Connect(function(dt)
 end)
 
 local Section = Tab:Section({ 
-    Title = "Fram",
+    Title = "farm",
     TextXAlignment = "Left",
     TextSize = 17, -- Default Size
 })
@@ -220,8 +202,8 @@ end)
 
 -- Toggle GUI
 local Toggle = Tab:Toggle({
-    Title = "Auto Kill Bunny",
-    Desc = " attack Bunny",
+    Title = "tự động đánh thỏ",
+    Desc = " đánh thỏ",
     Icon = "bird",
     Type = "Toggle",
     Default = false,
@@ -240,7 +222,7 @@ local Toggle = Tab:Toggle({
 })
 
 local Section = Tab:Section({ 
-    Title = "Child",
+   CurrentCamd =" đứa trẻ",
     TextXAlignment = "Left",
     TextSize = 17, -- Default Size
 })
@@ -318,8 +300,8 @@ local Button = Tab:Button({
 })
 
 local Button = Tab:Button({
-    Title = "Tween to lost child 2",
-    Desc = "Carry lost child 2 to campire",
+    Title = "tự động cứu đứa trẻ thứ 2",
+    Desc = "cần lửa trại lv2",
     Locked = false,
     Callback = function()
         local Players = game:GetService("Players")
@@ -372,8 +354,8 @@ local Button = Tab:Button({
 })
 
 local Button = Tab:Button({
-    Title = "Tween to lost child 3",
-    Desc = "Carry lost child 3 to campire",
+    Title = "cứu đứa trẻ 3",
+    Desc = "cần lừa trại 3",
     Locked = false,
     Callback = function()
         local Players = game:GetService("Players")
@@ -426,8 +408,8 @@ local Button = Tab:Button({
 })
 
 local Button = Tab:Button({
-    Title = "Tween to lost child 4",
-    Desc = "Carry lost child 4 to campire",
+    Title = "giải cứu đứa trẻ 4",
+    Desc = "cần lửa trại 4",
     Locked = false,
     Callback = function()
         local Players = game:GetService("Players")
@@ -480,14 +462,14 @@ local Button = Tab:Button({
 })
 
 local Section = Tab:Section({ 
-    Title = "Cook & Eat",
+    Title = "nấu & ăn",
     TextXAlignment = "Left",
     TextSize = 17, -- Default Size
 })
 
 local Button = Tab:Button({
-    Title = "Eat",
-    Desc = " eat Cooked Morsel when hunger < 90%",
+    Title = "ăn",
+    Desc = " ăn nếus độ đói dưới 90%",
     Locked = false,
     Callback = function()
         local Players = game:GetService("Players")
@@ -524,7 +506,7 @@ local Button = Tab:Button({
 })
 
 local Button = Tab:Button({
-    Title = "Cook Foods",
+    Title = "nấu ăn",
     Desc = "",
     Locked = false,
     Callback = function()
@@ -560,7 +542,7 @@ local Button = Tab:Button({
 })
 -- Tabs 2
 local Section = Tab2:Section({ 
-    Title = "Fuel",
+    Title = "nhiên liệu",
     TextXAlignment = "Left",
     TextSize = 17, -- Default Size
 })
@@ -577,23 +559,23 @@ local stopDrag = rs.RemoteEvents.StopDraggingItem
 -- Fuel
 -- =======================
 local targetFuel = {
-    ["Log"] = true,
-    ["Coal"] = true,
-    ["Oil Barrel"] = true,
-    ["Fuel Canister"] = true,
-    ["Cultist"] = true,
-    ["Bear Corpse"] = true,
-    ["Alpha Wolf Corpse"] = true,
-    ["Wolf Corpse"] = true,
-    ["Crossbow Cultist"] = true
+    ["gỗ"] = false,
+    ["than"] = true,
+    ["dàu hỏa"] = true,
+    ["dàu hỏa lớn"] = true,
+    ["không biết"] = true,
+    ["da gấu"] = true,
+    ["da sói alpha"] = true,
+    ["da sói thường"] = true,
+    ["Crossbow Cultist(ko bt)"] = true
 }
 _G.BringFuel = false
 local savedPositionFuel
 
 -- Fuel ON
 local FuelOn = Tab2:Button({
-    Title = "Bring Fuel",
-    Desc = "Bring all Fuel",
+    Title = "lấy than",
+    Desc = "lấy tất cả nhiên liệu",
     Locked = false,
     Callback = function()
         if _G.BringFuel then return end
@@ -621,8 +603,8 @@ local FuelOn = Tab2:Button({
 
 -- Fuel OFF
 local FuelOff = Tab2:Button({
-    Title = "Stop Fuel",
-    Desc = "Stop bring Fuel",
+    Title = "Stop lấy than",
+    Desc = "Stop lấy than",
     Locked = false,
     Callback = function()
         _G.BringFuel = false
@@ -633,7 +615,7 @@ local FuelOff = Tab2:Button({
 })
 
 local Section = Tab2:Section({ 
-    Title = "Metal",
+    Title = "đồng nát sắt vụn",
     TextXAlignment = "Left",
     TextSize = 17, -- Default Size
 })
@@ -662,8 +644,8 @@ local savedPositionMetal
 
 -- Metal ON
 local MetalOn = Tab2:Button({
-    Title = "Bring Metal",
-    Desc = "Bring all Metal",
+    Title = "lấy sắt đã chọn",
+    Desc = "lấy tất cả sắt đã chọn",
     Locked = false,
     Callback = function()
         if _G.BringMetal then return end
@@ -691,7 +673,7 @@ local MetalOn = Tab2:Button({
 
 -- Metal OFF
 local MetalOff = Tab2:Button({
-    Title = "Stop Metal",
+    Title = "Stop lấy sắt",
     Desc = "Stop bring Metal",
     Locked = false,
     Callback = function()
@@ -703,7 +685,7 @@ local MetalOff = Tab2:Button({
 })
 
 local Section = Tab2:Section({ 
-    Title = "Food",
+    Title = "đồ ăn",
     TextXAlignment = "Left",
     TextSize = 17, -- Default Size
 })
@@ -712,33 +694,18 @@ local Section = Tab2:Section({
 -- Food
 -- =======================
 local targetFood = {
-    ["Steak"] = true,
-	["BBQ Ribs"] = true,
-	["Candy Apple"] = true,
+    ["thịt"] = true,
+	["thịt to"] = true,
     ["Carrot"] = true,
-    ["Berry"] = true,
-	["Cotton Candy"] = true,
-    ["Chili"] = true,
-	["Lava Eel"] = true,
-	["Candy Corn"] = true,
-    ["Morsel"] = true,
-    ["Stew"] = true,
-    ["Corn"] = true,
-    ["Pumpkin"] = true,
-	["Casserole"] = true,
-    ["Apple"] = true,
-	["Berry Juice"] = true,
-    ["Ribs"] = true,
-    ["Cake"] = true,
-    ["Hearty Stew"] = true,
-    ["Shark"] = true,
-    ["Swordfish"] = true,
-    ["Eel"] = true,
-    ["Char"] = true,
-    ["Swordfish"] = true,
-    ["Mackerel"] = true,
-    ["Salmon"] = true,
-    ["Clownfish"] = true
+    ["mọng"] = true,
+    ["ớt"] = true, 
+    ["bánh kem"] = true,
+    ["Stew(không biết)"] = true,
+    ["ngô"] = true,
+    ["bí ngô"] = true,
+	["Casserole(không biết)"] = true,
+    ["táo"] = true,
+	["nước ép táo"] = true,
 }
 
 _G.BringFood = false
@@ -746,7 +713,7 @@ local savedPositionFood
 
 -- Food ON
 local FoodOn = Tab2:Button({
-    Title = "Bring Food",
+    Title = "lấy đồ ăn đã chọn",
     Desc = "Bring all Food",
     Locked = false,
     Callback = function()
@@ -775,7 +742,7 @@ local FoodOn = Tab2:Button({
 
 -- Food OFF
 local FoodOff = Tab2:Button({
-    Title = "Stop Food",
+    Title = "Stop lấy đồ ăn",
     Desc = "Stop bring Food",
     Locked = false,
     Callback = function()
@@ -787,7 +754,7 @@ local FoodOff = Tab2:Button({
 })
 
 local Section = Tab2:Section({ 
-    Title = "Ammo",
+    Title Firđanj",
     TextXAlignment = "Left",
     TextSize = 17, -- Default Size
 })
@@ -795,9 +762,9 @@ local Section = Tab2:Section({
 -- Ammo
 -- =======================
 local targetAmmo = {
-    ["Revolver Ammo"] = true,
-    ["Rifle Ammo"] = true,
-    ["Shotgun Ammo"] = true
+    ["súng trường đạn"] = true,
+    ["lục đạn"] = true,
+    ["Shotgun đạn"] = true
 }
 
 _G.BringAmmo = false
@@ -805,7 +772,7 @@ local savedPositionAmmo
 
 -- Ammo ON
 local AmmoOn = Tab2:Button({
-    Title = "Bring Ammo",
+    Title = "lấy đạn đã chọn ",
     Desc = "Bring all Ammo",
     Locked = false,
     Callback = function()
@@ -834,7 +801,7 @@ local AmmoOn = Tab2:Button({
 
 -- Ammo OFF
 local AmmoOff = Tab2:Button({
-    Title = "Stop Ammo",
+    Title = "Stop lấy đạn",
     Desc = "Stop bring Ammo",
     Locked = false,
     Callback = function()
@@ -849,19 +816,16 @@ local AmmoOff = Tab2:Button({
 -- Tools & Weapons
 -- =======================
 local targetTools = {
-    ["Bandage"] = true,
-    ["Rifle"] = true,
-    ["Revolver"] = true,
-    ["Laser Cannon"] = true,
+    ["băng"] = true,
     ["Ray Gun"] = true,
-    ["Laser Sword"] = true,
+    ["kiếm laser"] = true,
     ["Katana"] = true,
-    ["Strong Flashlight"] = true,
-    ["Old Flashlight"] = true
+    ["đèn pin mạnh"] = true,
+    ["đèn pin lỏ"] = true
 }
 
 local Section = Tab2:Section({ 
-    Title = "Tools",
+    Title = "đồ",
     TextXAlignment = "Left",
     TextSize = 17, -- Default Size
 })
@@ -871,7 +835,7 @@ local savedPositionTools
 
 -- Tools ON
 local ToolsOn = Tab2:Button({
-    Title = "Bring Tools",
+    Title = "lấy đồ đã chọn",
     Desc = "Bring all Tools/Weapons",
     Locked = false,
     Callback = function()
@@ -900,7 +864,7 @@ local ToolsOn = Tab2:Button({
 
 -- Tools OFF
 local ToolsOff = Tab2:Button({
-    Title = "Stop Tools",
+    Title = "Stop lấy đồ",
     Desc = "Stop bring Tools/Weapons",
     Locked = false,
     Callback = function()
@@ -912,7 +876,7 @@ local ToolsOff = Tab2:Button({
 })
 
 local Section = Tab2:Section({ 
-    Title = "Others",
+    Title = "tất cả",
     TextXAlignment = "Left",
     TextSize = 17, -- Default Size
 })
@@ -981,7 +945,7 @@ end
   
 -- Nút Bring Log
 local ButtonOn = Tab2:Button({
-    Title = "Bring Sapling",
+    Title = "lấy cái cây",
     Desc = "Bring all Saplings",
     Callback = function()
         if _G.BringSapling then return end
@@ -1026,7 +990,7 @@ end
   
 -- Nút Bring Log
 local ButtonOn = Tab2:Button({
-    Title = "Bring Log",
+    Title =lấy gỗ",
     Desc = "Bring all Logs",
     Callback = function()
         if _G.bringLog then return end
@@ -1071,7 +1035,7 @@ end
 
 -- Nút Bring Coal
 local ButtonOn = Tab2:Button({
-    Title = "Bring Coal",
+    Title = "lấy than",
     Desc = "Bring all Coal",
     Callback = function()
         if _G.BringCoal then return end
@@ -1115,7 +1079,7 @@ end
 
 -- Nút Bring Broken Microwave
 local ButtonOn = Tab2:Button({
-    Title = "Bring Broken Microwave",
+    Title = "Bring Broken Microwave(ko bt)",
     Desc = "Bring all Broken Microwaves",
     Callback = function()
         if _G.BringMicrowave then return end
@@ -1171,7 +1135,7 @@ local ButtonOn = Tab2:Button({
 
 
 local Section = Tab3:Section({ 
-    Title = "Speed",
+    Title = "tốc độ",
     TextXAlignment = "Left",
     TextSize = 17, -- Default Size
 })
@@ -1188,7 +1152,7 @@ local defaultSpeed = 16 -- tốc độ chuẩn Roblox
 
 -- Slider chỉnh tốc độ
 local Slider = Tab3:Slider({
-    Title = "WalkSpeed",
+    Title = "tốc độ chạy",
     Step = 1,
     Value = {
         Min = 20,
@@ -1205,7 +1169,7 @@ local Slider = Tab3:Slider({
 
 -- Toggle bật/tắt
 local Toggle = Tab3:Toggle({
-    Title = "Toggle Speed",
+    Title ="tốc độ",
     Desc = "On/Off Speed",
     Icon = "bird",
     Type = "Toggle",
@@ -1221,13 +1185,13 @@ local Toggle = Tab3:Toggle({
 })
 
 local Section = Tab3:Section({ 
-    Title = "Others",
+    Title = "tất cả",
     TextXAlignment = "Left",
     TextSize = 17, -- Default Size
 })
 
 local Section = Tab4:Section({ 
-    Title = "Kill Aura",
+    Title = "giết xung quanh",
     TextXAlignment = "Left",
     TextSize = 17, -- Default Size
 })
@@ -1237,7 +1201,7 @@ local DistanceForKillAura = 70 -- default
 
 -- Slider (dùng Value = {...} như bạn đưa)
 local Slider = Tab4:Slider({
-    Title = "Kill Aura Distance",
+    Title = "kill aura",
     Step = 1,
     Value = {
         Min = 20,
@@ -1282,7 +1246,7 @@ end
 
 -- Toggle
 local Toggle = Tab4:Toggle({
-    Title = "Kill Aura",
+    Title = "giết vùng",
     Default = false,
     Callback = function(state)
         ActiveKillAura = state
@@ -1293,7 +1257,7 @@ local Toggle = Tab4:Toggle({
 })
 
 local Section = Tab4:Section({ 
-    Title = "Tree Aura",
+    Title = "chặt cây auto",
     TextXAlignment = "Left",
     TextSize = 17, -- Default Size
 })
@@ -1337,11 +1301,11 @@ end
 
 -- Slider trong library
 local AutoChopTreeSlider = Tab4:Slider({
-    Title = "Distance For Auto Chop Tree",
+    Titleplayvungf chặt cáy",
     Step = 1,
     Value = {
-        Min = 20,
-        Max = 100,
+        Min = 50,
+        Max = 10000,
         Default = 100,
     },
     Callback = function(value)
@@ -1352,7 +1316,7 @@ local AutoChopTreeSlider = Tab4:Slider({
 
 -- Toggle trong library
 local AutoChopTreeToggle = Tab4:Toggle({
-    Title = "Auto Chop Tree",
+    Title = "Auto chặt cây",
     Desc = "Tree Aura",
     Icon = "bird",
     Type = "Toggle",
@@ -1371,22 +1335,22 @@ local AutoChopTreeToggle = Tab4:Toggle({
 
 
 local Section = Tab5:Section({ 
-    Title = "Fuel",
+    Title = "nhiên liệu",
     TextXAlignment = "Left",
     TextSize = 17, -- Default Size
 })
 
 -- danh sách item cần highlight + tên
 local itemsFuel = {
-    ["Log"] = true,
-    ["Coal"] = true,
-    ["Oil Barrel"] = true,
-    ["Fuel Canister"] = true,
-    ["Cultist"] = true,
-    ["Bear Corpse"] = true,
-    ["Alpha Wolf Corpse"] = true,
-    ["Wolf Corpse"] = true,
-    ["Crossbow Cultist"] = true
+    ["Log(gỗ)"] = fals,
+    ["Coal(than)"] = true,
+    ["Oil Barrel(dàu hỏa)"] = true,
+    ["Fuel Canister(thùng dàu)"] = true,
+    ["Cultist(không biết)"] = true,
+    ["Bear Corpse(da gấu)"] = true,
+    ["Alpha Wolf Corpse(da sói alpha)"] = true,
+    ["Wolf Corpse(da sói thường)"] = true,
+    ["Crossbow Cultist(không biết)"] = true
 }
 
 local ActiveFuelESP = false
@@ -1473,7 +1437,7 @@ end
 
 -- Toggle trong library
 local Toggle = Tab5:Toggle({
-    Title = "Fuel ESP",
+    Title = "định vị dàu",
     Description = "",
     Default = false,
     Callback = function(state)
@@ -1483,18 +1447,18 @@ local Toggle = Tab5:Toggle({
 })
 
 local Section = Tab5:Section({ 
-    Title = "Metal",
+    Title = "sắt",
     TextXAlignment = "Left",
     TextSize = 17, -- Default Size
 })
 
 local ItemsMetal = {
-    ["Bolt"] = true,
-    ["Sheet Metal"] = true,
+    ["Bolt(sắt)"] = true,
+    ["Sheet Metal(sắt)"] = true,
     ["UFO Junk"] = true,
     ["UFO Component"] = true,
-    ["Broken Fan"] = true,
-    ["Broken Radio"] = true,
+    ["Broken Fan(sắt)"] = true,
+    ["Broken Radio(sắt)"] = true,
     ["Broken Microwave"] = true,
     ["Tyre"] = true,
     ["Metal Chair"] = true,
@@ -1590,7 +1554,7 @@ end
 
 -- Toggle trong library
 local Toggle = Tab5:Toggle({
-    Title = "Metal ESP",
+    Title = "định vị sắt",
     Description = "Highlight + tên cho ItemsMetal",
     Default = false,
     Callback = function(state)
@@ -1602,7 +1566,7 @@ local Toggle = Tab5:Toggle({
 
 local Section = Tab5:Section({ 
     Title = "Food",
-    TextXAlignment = "Left",
+    TextXAlignment = "đồ ăn",
     TextSize = 17, -- Default Size
 })
 
@@ -1708,7 +1672,7 @@ end
 
 -- Toggle trong library
 local Toggle = Tab5:Toggle({
-    Title = "Food ESP",
+    Title = "định vị đồ ăn",
     Description = "",
     Default = false,
     Callback = function(state)
@@ -1722,7 +1686,7 @@ local Lighting = game:GetService("Lighting")
 local FullBrightConnection
 
 local Toggle = Tab6:Toggle({
-    Title = "Full Bright",
+    Title = "trời sáng liên tục",
     Description = "",
     Default = false,
     Callback = function(state)
@@ -1769,7 +1733,7 @@ local Button = Tab6:Button({
 })
 
 local Button = Tab7:Button({
-    Title = "Anti-Wolf Gui",
+    Title = "sói không cắn được mình(bản khác)",
     Desc = "",
     Locked = false,
     Callback = function()
